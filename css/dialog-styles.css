@@ -1,0 +1,109 @@
+/* Dialog Container */
+.dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* General Dialog Box */
+.dialog-container:not(.alert) .dialog-box {
+    background-color: #ffffff; /* White for non-alerts */
+    border: none; /* No specific border for general dialogs */
+}
+
+.dialog-box {
+    width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Alert-Specific Styles */
+.dialog-container.alert .dialog-box {
+    border: 2px solid #d32f2f; /* Red border for alert */
+    background-color: #ffe6e6; /* Light red background */
+}
+
+.dialog-container.alert #dialog-title {
+    color: #d32f2f; /* Red title for alert */
+}
+
+.dialog-container.alert #dialog-ok {
+    background-color: #d32f2f; /* Red button */
+    color: #fff;
+}
+
+.dialog-container.alert #dialog-ok:hover {
+    background-color: #b71c1c; /* Darker red on hover */
+}
+
+/* Hidden class to hide the dialog */
+.hidden {
+    display: none;
+}
+
+/* Dialog Title */
+#dialog-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Dialog Message */
+#dialog-message {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* Input Field */
+#dialog-input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Buttons */
+.dialog-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.dialog-buttons button {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* General OK Button */
+.dialog-container:not(.alert) #dialog-ok {
+    background-color: #3964d6; /* Blue for non-alerts */
+    color: #fff;
+}
+
+/* General Cancel Button */
+.dialog-container:not(.alert) #dialog-cancel {
+    background-color: #e57373;
+    color: #fff;
+}
+
+.dialog-buttons button:hover {
+    transform: translateY(-2px);
+}
+
+.dialog-buttons button:active {
+    transform: translateY(1px);
+}

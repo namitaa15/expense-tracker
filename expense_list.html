@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense List</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/expense_list.css">
+    <link rel="stylesheet" href="css/dialog-styles.css">
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Expense Tracker</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="index.html#add-expense-section">Add New Expense</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Search and Filters -->
+        <section class="filters">
+            <h2>Expense List</h2>
+            <div class="filter-controls">
+                <input type="text" id="search-bar" placeholder="Search by description or category">
+                <select id="category-filter">
+                    <option value="">Filter by Category</option>
+                    <option value="food">Food</option>
+                    <option value="transport">Transport</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="utilities">Utilities</option>
+                    <option value="education">Education</option>
+                    <option value="others">Others</option>
+                </select>
+                <select id="date-sort">
+                    <option value="">Sort by Date</option>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+                <select id="amount-sort">
+                    <option value="">Sort by Amount</option>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+            </div>
+            <button id="add-new-expense" onclick="window.location.href='index.html#add-expense-section'">Add New Expense</button>
+        </section>
+
+        <!-- Expense Table -->
+        <section class="expense-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="expense-table-body">
+                    <!-- Expense rows will be populated dynamically -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Expense Summary -->
+        <section class="expense-summary">
+            <h2>Expense Summary</h2>
+            <p id="total-expense">Total Expense: $0.00</p>
+            <div class="date-range-filter">
+                <div class="date-fields">
+                    <label for="start-date">Start:</label>
+                    <input type="date" id="start-date">
+                    <label for="end-date">End:</label>
+                    <input type="date" id="end-date">
+                </div>
+                <button id="filter-by-date">Filter</button>
+            </div>
+            
+            <ul id="expense-by-category">
+                <!-- Category-wise breakdown will be populated dynamically -->
+            </ul>
+        </section>
+
+        <!-- Pagination -->
+        <section class="pagination">
+            <button id="prev-page">Previous</button>
+            <span id="current-page">Page 1</span>
+            <button id="next-page">Next</button>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Expense Tracker</p>
+    </footer>
+
+    <!-- Confirmation Modal -->
+    <div id="custom-dialog" class="dialog-container hidden">
+        <div class="dialog-box">
+            <h2 id="dialog-title"></h2>
+            <p id="dialog-message"></p>
+            <input type="text" id="dialog-input" class="hidden" />
+            <div class="dialog-buttons">
+                <button id="dialog-ok">OK</button>
+                <button id="dialog-cancel" class="hidden">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- Include the JavaScript file -->
+    <script src="js/dialog.js"></script>
+    
+    <!-- JavaScript Resources -->
+    <script src="js/firebase.js" type="module"></script>
+    <script src="js/expense_list.js" type="module"></script>
+</body>
+</html>

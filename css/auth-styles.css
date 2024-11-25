@@ -1,0 +1,199 @@
+auth-styles.css
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Background with Tint and Blur */
+body {
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    color: #333; /* Neutral text color */
+}
+
+body::before {
+    content: '';
+    position: fixed; /* Covers the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(56, 35, 96, 0.5), rgba(36, 58, 118, 0.6)), 
+        url('background.png') no-repeat center center fixed;
+    background-size: cover; /* Ensures the image covers the viewport */
+    filter: blur(12px); /* Enhanced blur for a softer effect */
+    z-index: -1; /* Places the pseudo-element behind content */
+    background-blend-mode: overlay; /* Blends the gradient and image */
+}
+
+/* Header */
+header {
+    background: linear-gradient(to right, #5a3d99, #3964d6);
+    color: white;
+    text-align: center;
+    padding: 20px 15px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+header h2 {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 0.5px;
+}
+
+/* Main Section */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Authentication Container */
+.auth-container {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 40px 30px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.auth-header {
+    font-size: 2.2rem;
+    color: #57c4e5;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* Input Group */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.auth-label {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.auth-input {
+    width: 90%;
+    padding: 15px;
+    font-size: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-input:focus {
+    border-color: #5db9d6;
+    box-shadow: 0 0 8px rgba(93, 185, 214, 0.6);
+}
+
+/* Authentication Actions */
+.auth-actions {
+    margin-top: 20px;
+}
+
+.auth-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(to right, #5db9d6, #4e9db1);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.auth-button:hover {
+    background: linear-gradient(to right, #4e9db1, #5db9d6);
+    box-shadow: 0 4px 12px rgba(93, 185, 214, 0.5);
+    transform: translateY(-2px);
+}
+
+.auth-link {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #57c4e5;
+}
+
+.auth-link a {
+    color: #57c4e5;
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(to right, #5a3d99, #243a76);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    margin-top: 20px;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+footer:hover p {
+    opacity: 1;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    header h2 {
+        font-size: 0.9rem;
+    }
+
+    .auth-container {
+        padding: 20px;
+    }
+
+    .auth-header {
+        font-size: 2rem;
+    }
+
+    footer {
+        font-size: 0.8rem;
+    }
+}

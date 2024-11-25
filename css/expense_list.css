@@ -1,0 +1,501 @@
+/* General Layout and Background */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #e7f9f7; /* Soft blue-green pastel */
+    color: #333; /* Dark gray text for readability */
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Header Styling */
+header {
+    background: linear-gradient(to right, #5a3d99, #3964d6); /* Dark purple to vibrant blue gradient */
+    padding: 15px 20px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow below the header */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+    color: #ffffff; /* White text */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for emphasis */
+}
+
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Filters and Controls */
+.filters {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#search-bar {
+    padding: 10px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#add-new-expense {
+    padding: 10px 20px;
+    background-color: #66bb6a; /* Light green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#add-new-expense:hover {
+    background-color: #558b2f; /* Darker green */
+}
+
+/* Expense Table */
+.expense-table {
+    margin: 20px auto;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead th {
+    background-color: #5a3d99; /* Dark purple matching the header */
+    color: #ffffff;
+    font-weight: bold;
+    padding: 12px;
+    font-size: 16px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f3f3f3;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+tbody tr:hover {
+    background-color: #c8e6c9; /* Light green on hover */
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.action-buttons button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-buttons .edit-btn {
+    background-color: #42a5f5; /* Blue */
+    color: white;
+}
+
+.action-buttons .edit-btn:hover {
+    background-color: #1e88e5; /* Darker blue */
+}
+
+.action-buttons .delete-btn {
+    background-color: #ef5350; /* Red */
+    color: white;
+}
+
+.action-buttons .delete-btn:hover {
+    background-color: #d32f2f; /* Darker red */
+}
+
+/* Expense Summary */
+.expense-summary {
+    background-color: #ffffff; /* Soft White */
+    padding: 30px; /* Increased padding for spaciousness */
+    border-radius: 10px; /* Rounded corners for a modern look */
+    margin-top: 20px;
+    text-align: center;
+    border: 1px solid #e0e0e0; /* Light border for structure */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for elevation */
+}
+
+
+/* Total Expense Styling */
+#total-expense {
+    font-size: 28px;
+    font-weight: 800;
+    color: #3964d6; /* Vibrant Blue */
+    margin: 20px 0;
+}
+/* Date Range Filter */
+/* Parent Container Styling */
+.date-range-filter {
+    display: flex; /* Flexbox for alignment */
+    flex-direction: column; /* Stack date fields and filter button */
+    align-items: flex-start; /* Align items to the left */
+    gap: 15px; /* Add space between date fields and button */
+}
+
+/* Date Fields Styling */
+.date-fields {
+    display: flex; /* Flexbox for horizontal alignment of Start and End */
+    justify-content: space-between; /* Space between Start and End */
+    gap: 20px; /* Add space between Start and End fields */
+    width: 100%; /* Ensure fields stretch to container width */
+}
+
+/* Label Styling */
+.date-fields label {
+    margin-top: 20px; /* Adjust this value for better alignment */
+    display: inline-block; /* Ensure labels behave as block-like elements */
+    font-size: 16px; /* Consistent font size */
+    margin-right: 5px; /* Space between label and input field */
+    color: #333; /* Neutral text color */
+}
+
+/* Input Field Styling */
+.date-fields input[type="date"] {
+    width: 45%; /* Adjust width for balanced look */
+    padding: 10px; /* Comfortable padding */
+    border: 1px solid #d1d5db; /* Light gray border */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 16px; /* Consistent font size */
+    box-sizing: border-box;
+}
+
+.date-fields input[type="date"]:focus {
+    border-color: #3964d6; /* Vibrant blue on focus */
+    box-shadow: 0 0 8px rgba(57, 100, 214, 0.3); /* Subtle glow */
+    outline: none; /* Remove default outline */
+}
+
+/* Filter Button Styling */
+.date-range-filter button {
+    align-self: center; /* Center the button below date fields */
+    padding: 10px 20px; /* Comfortable padding */
+    font-size: 16px; /* Consistent font size */
+    font-weight: bold; /* Emphasize the button text */
+    color: white; /* White text */
+    background: linear-gradient(to right, #5db9d6, #4e9db1); /* Light blue gradient */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor for buttons */
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.date-range-filter button:hover {
+    background: linear-gradient(to right, #4e9db1, #5db9d6); /* Slightly darker gradient */
+    box-shadow: 0 4px 12px rgba(93, 185, 214, 0.5); /* Soft shadow */
+    transform: translateY(-3px); /* Slight lift effect */
+}
+
+.date-range-filter button:active {
+    transform: scale(0.98); /* Pressed button effect */
+}
+
+
+/* Filter Button */
+.expense-summary button {
+    width: 100%; /* Full-width for responsiveness */
+    padding: 15px; /* Comfortable padding */
+    margin-top: 10px; /* Space above the button */
+    background: linear-gradient(to right, #5db9d6, #4e9db1); /* Light blue to teal gradient */
+    color: white; /* White text */
+    font-weight: bold; /* Bold text for emphasis */
+    font-size: 16px; /* Readable font size */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+.expense-summary button:hover {
+    background: linear-gradient(to right, #4e9db1, #5db9d6); /* Darker gradient on hover */
+    box-shadow: 0 4px 12px rgba(93, 185, 214, 0.5); /* Shadow on hover */
+    transform: translateY(-3px); /* Slight lift on hover */
+}
+
+.expense-summary button:active {
+    transform: scale(0.98); /* Slight press-down effect */
+}
+
+/* Expense List as Bullets */
+#expense-by-category {
+    list-style: disc; /* Show bullet points */
+    padding: 0 20px; /* Add left padding for indentation */
+    margin-top: 20px; /* Space above the list */
+    text-align: left; /* Align items to the left */
+}
+
+/* Expense List Items */
+#expense-by-category li {
+    margin: 5px 0; /* Space between list items */
+    padding: 12px 20px; /* Add padding for spaciousness */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 18px; /* Readable font size */
+    background-color: #ffffff; /* White for odd rows */
+    color: #333; /* Neutral text color */
+}
+
+/* Alternate Row Styling */
+#expense-by-category li:nth-child(even) {
+    background-color: #f7f8fa; /* Very light gray for even rows */
+}
+
+#expense-by-category li:hover {
+    background-color: #e3f2fd; /* Light blue on hover */
+    color: #3964d6; /* Vibrant blue for hover text */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transition */
+}
+
+/* Pagination */
+.pagination {
+    display: flex; /* Align items horizontally */
+    justify-content: center; /* Center-align the items */
+    align-items: center; /* Align items vertically */
+    gap: 15px; /* Spacing between buttons and the page number */
+    margin-top: 20px; /* Add spacing above the pagination */
+    padding: 10px; /* Add padding for a clean look */
+}
+
+/* Pagination Buttons */
+.pagination button {
+    padding: 8px 16px; /* Compact button size */
+    font-size: 14px; /* Font size matching the page indicator */
+    border-radius: 6px; /* Retain rounded corners */
+    white-space: nowrap; /* Prevent wrapping of button text */
+}
+
+/* Page Indicator Styling */
+.pagination #current-page {
+    font-size: 14px; /* Match font size with buttons */
+    color: #333; /* Neutral text color */
+    font-weight: bold; /* Make it stand out */
+    margin: 0; /* Remove extra spacing around */
+    text-align: center; /* Center-align the text */
+    min-width: 60px; /* Ensure it takes up some width for alignment */
+}
+
+
+/* Footer */
+footer {
+    background: linear-gradient(to right, #5a3d99, #243a76); /* Matching header gradient */
+    text-align: center;
+    padding: 15px 0;
+    color: white;
+    margin-top: 20px;
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background-color: white;
+    width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.modal h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.modal p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.confirm-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#confirm-yes {
+    background-color: #66bb6a; /* Light green */
+    color: white;
+}
+
+#confirm-yes:hover {
+    background-color: #558b2f; /* Darker green */
+}
+
+#confirm-no {
+    background-color: #ef5350; /* Red */
+    color: white;
+}
+
+#confirm-no:hover {
+    background-color: #d32f2f; /* Darker red */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Header and Navigation */
+    header {
+        padding: 10px 15px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Filters */
+    .filters {
+        padding: 10px;
+    }
+
+    .filter-controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #search-bar {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    /* Expense Table */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead tr {
+        display: none;
+    }
+
+    tbody tr {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+    }
+
+    tbody td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    /* Expense Summary */
+    .expense-summary {
+        padding: 15px;
+    }
+
+    /* Pagination */
+    .pagination {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .pagination button {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    /* Modal */
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+    .pagination {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        gap: 10px; /* Adjust spacing for smaller layout */
+    }
+
+    .pagination button {
+        width: 100%; /* Make buttons full-width on smaller screens */
+        text-align: center; /* Center-align button text */
+    }
+
+    .pagination #current-page {
+        margin: 5px 0; /* Add vertical spacing for page indicator */
+    
+    }
+}

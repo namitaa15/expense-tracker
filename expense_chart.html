@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker - Expense Chart</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/expense_chart.css">
+    <link rel="stylesheet" href="css/dialog-styles.css">
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Expense Tracker - Expense Chart</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="expense_list.html">Expense List</a></li>
+                <li><button id="logout-button" type="button">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="chart-selection">
+            <h2>Select Chart Type and Time Range</h2>
+            <div class="chart-type">
+                <label for="chart-type">Select Chart Type:</label>
+                <select id="chart-type">
+                    <option value="bar">Bar Chart</option>
+                    <option value="pie">Pie Chart</option>
+                    <option value="line">Line Chart</option>
+                </select>
+            </div>
+
+            <div class="time-filter">
+                <label for="time-period">Select Time Period:</label>
+                <select id="time-period">
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="custom">Custom Range</option>
+                </select>
+                <div id="custom-date-range" style="display:none;">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date">
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end-date">
+                </div>
+            </div>
+        </section>
+
+        <section class="expense-summary">
+            <h2>Expense Summary</h2>
+            <p id="total-expense">Total Expenses: $0.00</p>
+            <p id="highest-expense">Highest Expense: $0.00</p>
+            <p id="lowest-expense">Lowest Expense: $0.00</p>
+        </section>
+
+        <section class="chart-area">
+            <h2>Expense Chart</h2>
+            <canvas id="expense-chart"></canvas>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2024 Expense Tracker</p>
+    </footer>
+    <div id="custom-dialog" class="dialog-container hidden">
+        <div class="dialog-box">
+            <h2 id="dialog-title"></h2>
+            <p id="dialog-message"></p>
+            <input type="text" id="dialog-input" class="hidden" />
+            <div class="dialog-buttons">
+                <button id="dialog-ok">OK</button>
+                <button id="dialog-cancel" class="hidden">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- Include the JavaScript file -->
+    <script src="js/dialog.js"></script>    
+    <script src="js/firebase.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/expense_chart.js" type="module"></script>
+</body>
+</html>
