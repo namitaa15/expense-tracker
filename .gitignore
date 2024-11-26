@@ -67,6 +67,8 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+/public/js/firebase.js
+
 js/firebase.js
 .DS_Store
 
