@@ -1,89 +1,115 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dialog-styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Expense Tracker</h1>
+        <nav>
+            <a href="expense_list.html">Expense List</a>
+            <a href="expense_chart.html">Expense Chart</a>
+            <a href="#" id="logout-link" type="button">Logout</a>
+        </nav>
+    </header>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/11.0.2/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/11.0.2/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <!-- Main Section -->
+    <main>
+        <!-- Add Expense Form -->
+        <section class="add-expense-section">
+            <h2>Add Expense</h2>
+            <form id="add-expense-form">
+                <input type="number" id="expense-amount" placeholder="Amount" required>
+                <input type="text" id="expense-description" placeholder="Description" required>
+                <input type="date" id="expense-date" required>
+                <select id="expense-category" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="food">Food</option>
+                    <option value="transport">Transport</option>
+                    <option value="utilities">Utilities</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="education">Education</option>
+                    <option value="others">Others</option>
+                </select>
+                <button type="submit">Add Expense</button>
+            </form>
+        </section>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+        <!-- Set Monthly Budget -->
+        <section class="set-budget-section">
+            <h2>Set Monthly Budget</h2>
+            <input type="number" id="monthly-budget-input" placeholder="Enter monthly budget">
+            <button id="save-budget-btn">Set Budget</button>
+            <p id="budget-warning" class="warning"></p>
+            <p id="monthly-budget-display">Current Budget: $0.00</p>
+        </section>
+
+        <!-- Expense Summary by Category -->
+        <section class="expense-summary-section">
+            <h2>Expense Summary by Category</h2>
+            <table id="expense-summary-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Total Expense</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Food</td>
+                        <td id="food-expense">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Transport</td>
+                        <td id="transport-expense">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Utilities</td>
+                        <td id="utilities-expense">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Entertainment</td>
+                        <td id="entertainment-expense">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Education</td>
+                        <td id="education-expense">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Others</td>
+                        <td id="others-expense">$0.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Expense Tracker</p>
+    </footer>
+    <div id="custom-dialog" class="dialog-container hidden">
+        <div class="dialog-box">
+            <h2 id="dialog-title"></h2>
+            <p id="dialog-message"></p>
+            <input type="text" id="dialog-input" class="hidden" />
+            <div class="dialog-buttons">
+                <button id="dialog-ok">OK</button>
+                <button id="dialog-cancel" class="hidden">Cancel</button>
+            </div>
+        </div>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+    
+    <!-- Include the JavaScript file -->
+    <script src="js/dialog.js"></script>
+    
+    <!-- JavaScript Resources -->
+    <script src="js/firebase.js" type="module"></script>
+    <script src="js/main.js" type="module"></script>
+</body>
 </html>
