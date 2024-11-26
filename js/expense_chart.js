@@ -64,7 +64,7 @@ function initializeChart() {
                 legend: { position: 'top' },
                 tooltip: {
                     callbacks: {
-                        label: (tooltipItem) => `$${tooltipItem.raw.toFixed(2)}`
+                        label: (tooltipItem) => `Rs. ${tooltipItem.raw.toFixed(2)}`
                     },
                     backgroundColor: 'rgba(90, 61, 153, 0.9)',
                     titleColor: '#ffffff',
@@ -176,9 +176,9 @@ function updateExpenseSummary(expenses) {
     const filteredExpenses = expenses.filter(value => value > 0); // Filter out zeros for minimum calculation
     const lowest = filteredExpenses.length ? Math.min(...filteredExpenses) : 0;
 
-    document.getElementById('total-expense').textContent = `Total Expenses: $${total.toFixed(2)}`;
-    document.getElementById('highest-expense').textContent = `Highest Expense: $${highest.toFixed(2)}`;
-    document.getElementById('lowest-expense').textContent = `Lowest Expense: $${lowest.toFixed(2)}`;
+    document.getElementById('total-expense').textContent = `Total Expenses: Rs. ${total.toFixed(2)}`;
+    document.getElementById('highest-expense').textContent = `Highest Expense: Rs. ${highest.toFixed(2)}`;
+    document.getElementById('lowest-expense').textContent = `Lowest Expense: Rs. ${lowest.toFixed(2)}`;
 
     console.log("Updated expense summary:", { total, highest, lowest });
 }
@@ -188,9 +188,9 @@ function resetChartAndSummary() {
     expenseChart.data.datasets[0].data = Array(categories.length).fill(0);
     expenseChart.update();
 
-    document.getElementById('total-expense').textContent = 'Total Expenses: $0.00';
-    document.getElementById('highest-expense').textContent = 'Highest Expense: $0.00';
-    document.getElementById('lowest-expense').textContent = 'Lowest Expense: $0.00';
+    document.getElementById('total-expense').textContent = 'Total Expenses: Rs. 0.00';
+    document.getElementById('highest-expense').textContent = 'Highest Expense: Rs. 0.00';
+    document.getElementById('lowest-expense').textContent = 'Lowest Expense: Rs. 0.00';
 
     console.log("Reset chart and summary to default values.");
 }

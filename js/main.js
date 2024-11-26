@@ -15,12 +15,12 @@ window.onload = function () {
             onValue(userBudgetRef, snapshot => {
                 const budget = snapshot.val();
                 budgetDisplay.textContent = budget
-                    ? `Current Budget: $${parseFloat(budget).toFixed(2)}`
-                    : 'Current Budget: $0.00';
+                    ? `Current Budget: Rs. ${parseFloat(budget).toFixed(2)}`
+                    : 'Current Budget: Rs. 0.00';
             });
         } else {
             console.warn("No user is logged in.");
-            budgetDisplay.textContent = 'Current Budget: $0.00';
+            budgetDisplay.textContent = 'Current Budget: Rs. 0.00';
         }
     });
 
@@ -39,7 +39,7 @@ window.onload = function () {
                 try {
                     const userBudgetRef = ref(database, `users/${user.uid}/budget`);
                     await set(userBudgetRef, budget);
-                    budgetDisplay.textContent = `Current Budget: $${budget.toFixed(2)}`;
+                    budgetDisplay.textContent = `Current Budget: Rs. ${budget.toFixed(2)}`;
                     console.log("Budget saved successfully.");
                 } catch (error) {
                     console.error("Error saving budget:", error);
@@ -55,7 +55,7 @@ window.onload = function () {
     
         categories.forEach(category => {
             const expenseElement = document.getElementById(`${category}-expense`);
-            const expenseValue = parseFloat(expenseElement.textContent.replace('$', '')) || 0;
+            const expenseValue = parseFloat(expenseElement.textContent.replace('Rs. ', '')) || 0;
             totalExpenses += expenseValue;
         });
     
@@ -71,14 +71,14 @@ window.onload = function () {
         const expenseCategory = document.getElementById('expense-category').value;
     
         const budgetDisplay = document.getElementById('monthly-budget-display');
-        const currentBudget = parseFloat(budgetDisplay.textContent.replace('Current Budget: $', '')) || 0;
+        const currentBudget = parseFloat(budgetDisplay.textContent.replace('Current Budget: Rs. ', '')) || 0;
     
         // Calculate current total expenses
         const currentTotalExpenses = calculateTotalExpenses();
     
         // Check if budget exceeds
         if (currentTotalExpenses + expenseAmount > currentBudget) {
-            alert(`Budget Overflow! Your total expenses will exceed the budget of $${currentBudget.toFixed(2)}.`);
+            alert(`Budget Overflow! Your total expenses will exceed the budget of Rs. ${currentBudget.toFixed(2)}.`);
             return;
         }
     
@@ -131,12 +131,12 @@ window.onload = function () {
                 }
 
                 // Update expense summary table
-                document.getElementById('food-expense').textContent = `$${categoryTotals.food.toFixed(2)}`;
-                document.getElementById('transport-expense').textContent = `$${categoryTotals.transport.toFixed(2)}`;
-                document.getElementById('utilities-expense').textContent = `$${categoryTotals.utilities.toFixed(2)}`;
-                document.getElementById('entertainment-expense').textContent = `$${categoryTotals.entertainment.toFixed(2)}`;
-                document.getElementById('education-expense').textContent = `$${categoryTotals.education.toFixed(2)}`;
-                document.getElementById('others-expense').textContent = `$${categoryTotals.others.toFixed(2)}`;
+                document.getElementById('food-expense').textContent = `Rs. ${categoryTotals.food.toFixed(2)}`;
+                document.getElementById('transport-expense').textContent = `Rs. ${categoryTotals.transport.toFixed(2)}`;
+                document.getElementById('utilities-expense').textContent = `Rs. ${categoryTotals.utilities.toFixed(2)}`;
+                document.getElementById('entertainment-expense').textContent = `Rs. ${categoryTotals.entertainment.toFixed(2)}`;
+                document.getElementById('education-expense').textContent = `Rs. ${categoryTotals.education.toFixed(2)}`;
+                document.getElementById('others-expense').textContent = `Rs. ${categoryTotals.others.toFixed(2)}`;
             });
         }
     });

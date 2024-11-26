@@ -67,7 +67,7 @@ function fetchExpenses() {
                 displaySummary(expenses);
             } else {
                 expenseTableBody.innerHTML = '<tr><td colspan="6">No expenses to display.</td></tr>';
-                totalExpenseDisplay.textContent = "Total Expense: $0.00";
+                totalExpenseDisplay.textContent = "Total Expense: Rs. 0.00";
                 expenseByCategoryList.innerHTML = "";
             }
         })
@@ -133,7 +133,7 @@ function displayExpenses(expenses) {
             <td>${expense.date}</td>
             <td>${expense.description}</td>
             <td>${expense.category}</td>
-            <td>$${expense.amount}</td>
+            <td>Rs. ${expense.amount}</td>
             <td><button class="edit-btn" data-id="${expense.id}">Edit</button></td>
             <td><button class="delete-btn" data-id="${expense.id}">Delete</button></td>
         `;
@@ -165,7 +165,7 @@ function displaySummary(expenses) {
         (total, expense) => total + parseFloat(expense.amount),
         0
     );
-    totalExpenseDisplay.textContent = `Total Expense: $${totalExpense.toFixed(2)}`;
+    totalExpenseDisplay.textContent = `Total Expense: Rs. ${totalExpense.toFixed(2)}`;
 
     const categoryBreakdown = {};
     expenses.forEach((expense) => {
@@ -178,7 +178,7 @@ function displaySummary(expenses) {
     expenseByCategoryList.innerHTML = "";
     for (const [category, amount] of Object.entries(categoryBreakdown)) {
         const listItem = document.createElement("li");
-        listItem.textContent = `${category}: $${amount.toFixed(2)}`;
+        listItem.textContent = `${category}: Rs. ${amount.toFixed(2)}`;
         expenseByCategoryList.appendChild(listItem);
     }
 }
@@ -241,7 +241,6 @@ async function editExpense(expenseId) {
         .catch((error) => console.error("Error updating expense: ", error));
 }
 
-// Helper function to validate date format
 // Helper function to validate date format and ensure it's a valid calendar date
 function isValidDate(date) {
     // Check basic format YYYY-MM-DD
