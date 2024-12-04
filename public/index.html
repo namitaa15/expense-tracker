@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/dialog-styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
 </head>
+
 <body>
     <!-- Header -->
     <header>
@@ -17,9 +21,24 @@
             <a href="#" id="logout-link" type="button">Logout</a>
         </nav>
     </header>
-
     <!-- Main Section -->
     <main>
+        <!-- Account Balance in White Container -->
+        <div class="shared-container account-balance-container">
+            <h2>Account Balance</h2>
+            <p id="budget-amount">Rs. 0.00</p>
+        </div>
+        <!-- Money Credited Form -->
+        <div class="shared-container credit-form-container">
+            <h2>Money Credited</h2>
+            <form id="credit-form">
+                <input type="text" id="credit-description" placeholder="Enter description (e.g., Salary, Bonus)"
+                    required />
+                <input type="number" id="credit-amount" placeholder="Enter amount to credit" required />
+                <input type="date" id="credit-date" required />
+                <button type="submit" id="credit-btn">Add Money</button>
+            </form>
+        </div>
         <!-- Add Expense Form -->
         <section class="add-expense-section">
             <h2>Add Expense</h2>
@@ -39,16 +58,6 @@
                 <button type="submit">Add Expense</button>
             </form>
         </section>
-
-        <!-- Set Monthly Budget -->
-        <section class="set-budget-section">
-            <h2>Set Monthly Budget</h2>
-            <input type="number" id="monthly-budget-input" placeholder="Enter monthly budget">
-            <button id="save-budget-btn">Set Budget</button>
-            <p id="budget-warning" class="warning"></p>
-            <p id="monthly-budget-display">Current Budget: $0.00</p>
-        </section>
-
         <!-- Expense Summary by Category -->
         <section class="expense-summary-section">
             <h2>Expense Summary by Category</h2>
@@ -104,12 +113,13 @@
             </div>
         </div>
     </div>
-    
+    <div id="toast-message" class="toast hidden"></div>
     <!-- Include the JavaScript file -->
     <script src="js/dialog.js"></script>
-    
+
     <!-- JavaScript Resources -->
     <script src="js/firebase.js" type="module"></script>
     <script src="js/main.js" type="module"></script>
 </body>
+
 </html>

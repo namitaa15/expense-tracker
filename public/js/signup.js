@@ -1,7 +1,9 @@
 // signup.js
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-import { app } from "./firebase.js"; // Import the initialized app
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
+import { app } from "./firebase.js"; // Import the initialized app
+const database = getDatabase(app); // Initialize Firebase Database
 // Select DOM elements
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
@@ -37,6 +39,13 @@ signupForm.addEventListener("submit", async (e) => {
     // Create a new user with email and password
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
+
+    // Initialize accountBalance in Firebase
+    const userRef = ref(database, `users/${user.uid}`);
+    await set(userRef, {
+      accountBalance: 0.00, // Default balance
+    });
+    console.log("User signed up and accountBalance initialized.");
 
     // Redirect to the login page after successful signup
     window.location.href = "login.html";

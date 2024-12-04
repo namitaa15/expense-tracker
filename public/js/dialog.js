@@ -115,3 +115,21 @@ window.prompt = function (message) {
         }
     });
 };
+const toastMessage = document.getElementById('toast-message');
+
+function showToast(message, duration = 3000) {
+    if (!toastMessage) return;
+
+    toastMessage.textContent = message;
+    toastMessage.classList.remove('hidden');
+    toastMessage.classList.add('show');
+
+    //
+    // Automatically hide the toast after the specified duration
+    setTimeout(() => {
+        toastMessage.classList.remove('show');
+        setTimeout(() => {
+            toastMessage.classList.add('hidden');
+        }, 300); // Wait for the transition to complete
+    }, duration);
+}

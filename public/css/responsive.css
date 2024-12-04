@@ -1,0 +1,258 @@
+/* General Responsive Styling */
+/* Center-align text in table cells */
+table td {
+    text-align: center; /* Center horizontally */
+    vertical-align: middle; /* Center vertically */
+    padding: 10px; /* Add padding for better spacing */
+    font-size: 16px; /* Adjust font size for readability */
+}
+@media (max-width: 768px) {
+    /* General Adjustments */
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    header, footer {
+        padding: 10px;
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav ul li {
+        margin: 0;
+    }
+
+    nav ul li a {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+
+    /* Adjust Sections */
+    section {
+        width: 95%;
+        margin: 10px auto;
+    }
+
+    input, button {
+        width: 100%;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    /* Adjust Headings */
+    h1, h2 {
+        font-size: 1.5em;
+    }
+
+    header h1 {
+        font-size: 2.2rem;
+    }
+
+    /* Adjust Forms */
+    form {
+        max-width: 100%;
+    }
+
+    /* Chart Adjustments */
+    .expense-chart {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        padding: 15px 0;
+    }
+
+    canvas {
+        width: 90% !important;
+        height: 400px !important; /* Increased height for better visibility */
+    }
+
+    /* Align Filter Controls */
+    .filter-controls {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .date-fields {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .date-fields input {
+        margin-bottom: 10px;
+    }
+
+    /* Expense Summary */
+    .expense-summary {
+        text-align: center;
+        padding: 15px;
+    }
+
+    #total-expense, #highest-expense, #lowest-expense {
+        font-size: 16px;
+    }
+
+    /* Adjust Tables */
+    table {
+        width: 100%;
+        text-align: center;
+        margin: 10px auto;
+    }
+
+    th, td {
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    tbody td {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Empty Table Row Alignment */
+    tbody td[data-label="No expenses"] {
+        text-align: center;
+        justify-content: center;
+    }
+
+    /* Pagination */
+    .pagination {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .pagination button {
+        padding: 12px;
+        font-size: 14px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .pagination #current-page {
+        margin: 5px 0;
+    }
+
+    /* Modal Dialogs */
+    .dialog-box {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .dialog-buttons button {
+        font-size: 14px;
+        width: 100%;
+    }
+
+    /* Footer Alignment */
+    footer p {
+        font-size: 12px;
+    }
+
+    .shared-container {
+        padding: 15px;
+        margin: 15px auto;
+    }
+
+    .account-balance-container h3, .credit-form-container h3 {
+        font-size: 1.5rem;
+    }
+
+    .account-balance-container p {
+        font-size: 1.8rem;
+    }
+
+    #credit-description, #credit-amount, #credit-btn {
+        font-size: 1rem;
+    }
+    table td {
+        display: flex;
+        flex-direction: column; /* Ensure proper stacking of text */
+        justify-content: center; /* Center vertically */
+        align-items: center; /* Center horizontally */
+        text-align: center; /* Text alignment fallback */
+    }
+
+    tbody td {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* Very Small Devices */
+@media (max-width: 480px) {
+    header h1, header h2 {
+        font-size: 1.2em;
+    }
+
+    .dialog-box {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .dialog-buttons button {
+        font-size: 14px;
+    }
+
+    /* Chart for Smallest Devices */
+    .expense-chart canvas {
+        width: 100% !important;
+        height: 350px !important; /* Increased height for smaller devices */
+    }
+
+    /* Adjust Labels */
+    .chart-selection label, .category-filter label, .time-filter label {
+        font-size: 1.1em;
+    }
+
+    button {
+        font-size: 1em;
+        padding: 8px 15px;
+    }
+
+    footer {
+        font-size: 0.9em;
+    }
+
+    /* Table Rows and Empty Message */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead tr {
+        display: none;
+    }
+
+    tbody tr {
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    tbody td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 10px;
+    }
+}
+/* Remove unnecessary styles that might interfere */
+tbody td:before {
+    content: none; /* Remove generated content if not needed */
+}

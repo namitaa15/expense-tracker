@@ -126,6 +126,7 @@ section h2 {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
+
 /* Form Elements */
 form {
   display: flex;
@@ -177,6 +178,84 @@ input::placeholder {
   color: #bbb;
   font-size: 0.9rem;
 }
+/* General container styling for both Account Balance and Money Credited */
+.shared-container {
+  width: 100%;
+  max-width: 800px; /* Ensure both containers have the same width */
+  background: #ffffff; /* White container background */
+  border-radius: 10px; /* Rounded corners */
+  padding: 40px; /* Padding for content */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin: 20px auto; /* Center the containers with spacing */
+  margin-top:0px;
+  margin-bottom:0px;
+  text-align: center; /* Center-align the text */
+}
+
+/* Account Balance Section */
+.account-balance-container {
+  font-size: 2.5rem; /* Larger font for prominence */
+  color: #4CAF50; /* Green color for positive balance */
+  font-weight: bold; /* Emphasize the balance */
+}
+
+.account-balance-container h2{
+  font-size: 1.8rem; /* Title size */
+  margin-bottom: 10px; /* Spacing under the title */
+  color: #333; /* Neutral color for title */
+}
+
+.account-balance-container p {
+  font-size: 2rem; /* Larger font for balance value */
+  background: none; /* No background */
+  padding: 0; /* Remove padding */
+  margin: 0; /* No extra margin */
+}
+
+/* Money Credited Form */
+.credit-form-container {
+  margin-top: 20px;
+}
+
+#credit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Spacing between fields */
+  width: 100%;
+}
+
+#credit-description, #credit-amount {
+  width: 100%; /* Full width within the container */
+}
+
+#credit-btn {
+  width: 100%; /* Full-width button */
+}
+
+/* Additional spacing between sections */
+.shared-container + .shared-container {
+  margin-top: 20px; /* Add spacing between the containers */
+}
+
+  .account-balance-container h2, .credit-form-container h2 {
+    color: #5db9d6; /* Vibrant blue color (same as Expense Summary by Category) */
+  font-size: 2.4rem; /* Slightly larger size for h2 */
+  font-weight: bold; /* Emphasize the headings */
+  letter-spacing: 1.2px; /* Add letter spacing for elegance */
+  margin-bottom: 20px; /* Ensure spacing below the headings */
+  text-align: center; /* Center-align the text */
+  }
+
+  .account-balance-container p {
+    font-size: 1.8rem; /* Adjust balance text for small screens */
+  }
+
+  #credit-description, #credit-amount, #credit-btn {
+    font-size: 1rem; /* Adjust font size for mobile */
+  }
+
+
+
 
 /* Current Budget Display */
 .current-budget {
@@ -257,40 +336,3 @@ footer:hover p {
 
 
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  header nav {
-    flex-direction: column; /* Stack buttons vertically */
-    gap: 10px; /* Reduce spacing */
-  }
-
-  header nav a {
-    padding: 10px 15px; /* Smaller padding for buttons */
-    font-size: 0.9rem;
-  }
-
-  section {
-    width: 95%;
-    padding: 20px;
-  }
-
-  input, select, button {
-    font-size: 0.9rem;
-  }
-
-  header h1 {
-    font-size: 2.2rem;
-  }
-    form {
-      max-width: 100%; /* Forms stretch fully on smaller screens */
-    }
-  
-  table {
-      width: 100%; /* Ensure table adjusts dynamically */
-      overflow-x: auto; /* Allow horizontal scrolling if needed */
-    }
-  
-  footer {
-      padding: 15px; /* Adjust padding for smaller screens */
-  }
-}

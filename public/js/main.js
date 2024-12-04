@@ -1,109 +1,116 @@
 import { auth, database } from './firebase.js';
-import { ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+import { ref, set, push, onValue, get, update } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
 window.onload = function () {
-    const budgetDisplay = document.getElementById('monthly-budget-display');
-    const budgetWarning = document.getElementById('budget-warning');
+    const accountBalanceDisplay = document.getElementById('budget-amount');
+
+    // Ensure DOM elements exist
+    if (!accountBalanceDisplay) {
+        console.error("'budget-amount' is missing in the DOM.");
+        return;
+    }
 
     // Authentication state listener
     auth.onAuthStateChanged(user => {
         if (user) {
             console.log("User authenticated:", user);
 
-            // Fetch user's budget from Firebase
-            const userBudgetRef = ref(database, `users/${user.uid}/budget`);
-            onValue(userBudgetRef, snapshot => {
-                const budget = snapshot.val();
-                budgetDisplay.textContent = budget
-                    ? `Current Budget: Rs. ${parseFloat(budget).toFixed(2)}`
-                    : 'Current Budget: Rs. 0.00';
+            // Fetch and update account balance
+            const accountBalanceRef = ref(database, `users/${user.uid}/accountBalance`);
+            onValue(accountBalanceRef, snapshot => {
+                const accountBalanceData = snapshot.val();
+                console.log("Fetched account balance:", accountBalanceData);
+
+                // Handle nested structure
+                const currentBalance = accountBalanceData?.balance || 0; // Access the nested 'balance' key
+                accountBalanceDisplay.textContent = `Rs. ${parseFloat(currentBalance).toFixed(2)}`;
             });
+
+            // Handle money credited
+            document.getElementById('credit-form').addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                const creditAmount = parseFloat(document.getElementById('credit-amount').value);
+                const creditDescription = document.getElementById('credit-description').value.trim();
+                const creditDate = document.getElementById('credit-date').value;
+
+                if (!creditDescription || isNaN(creditAmount) || creditAmount <= 0 || !creditDate) {
+                    alert("Please enter valid credit details.");
+                    return;
+                }
+
+                try {
+                    const snapshot = await get(accountBalanceRef);
+                    const currentBalance = snapshot.exists() ? snapshot.val().balance || 0 : 0;
+
+                    const newBalance = currentBalance + creditAmount;
+                    // Add the credit item to Firebase
+                    const creditRef = push(ref(database, `credits/${user.uid}`));
+                    await set(creditRef, {
+                        amount: creditAmount,
+                        description: creditDescription,
+                        date: creditDate
+                    });
+
+                    await set(accountBalanceRef, { balance: newBalance }); // Update nested balance
+
+                    // Update UI
+                    accountBalanceDisplay.textContent = `Rs. ${newBalance.toFixed(2)}`;
+                    document.getElementById('credit-form').reset();
+                    console.log("Money credited successfully. New balance:", newBalance);
+                } catch (error) {
+                    console.error("Error crediting money:", error);
+                }
+            });
+
+            // Add expense with account balance check
+            document.getElementById('add-expense-form').addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                const expenseAmount = parseFloat(document.getElementById('expense-amount').value);
+                const expenseCategory = document.getElementById('expense-category').value;
+                const expenseDescription = document.getElementById('expense-description').value.trim();
+                const expenseDate = document.getElementById('expense-date').value;
+
+                if (!expenseCategory || !expenseDescription || isNaN(expenseAmount) || expenseAmount <= 0 || !expenseDate) {
+                    alert("Please enter valid expense details.");
+                    return;
+                }
+
+                try {
+                    const snapshot = await get(accountBalanceRef);
+                    const currentBalance = snapshot.exists() ? snapshot.val().balance || 0 : 0;
+
+                    // Check if account balance is sufficient
+                    if (expenseAmount > currentBalance) {
+                        alert(`Insufficient Balance! Your current balance is Rs. ${currentBalance.toFixed(2)}.`);
+                        return;
+                    }
+
+                    const newBalance = currentBalance - expenseAmount;
+                    await update(accountBalanceRef, { balance: newBalance }); // Update nested balance
+
+                    // Save the expense to Firebase
+                    const expenseRef = push(ref(database, `expenses/${user.uid}`));
+                    await set(expenseRef, {
+                        amount: expenseAmount,
+                        description: expenseDescription,
+                        date: expenseDate,
+                        category: expenseCategory
+                    });
+
+                    // Update UI
+                    accountBalanceDisplay.textContent = `Rs. ${newBalance.toFixed(2)}`;
+                    document.getElementById('add-expense-form').reset();
+                    console.log("Expense added successfully. Updated balance:", newBalance);
+                } catch (error) {
+                    console.error("Error adding expense or updating balance:", error);
+                }
+            });
+
         } else {
             console.warn("No user is logged in.");
-            budgetDisplay.textContent = 'Current Budget: Rs. 0.00';
-        }
-    });
-
-    // Save monthly budget
-    document.getElementById('save-budget-btn').addEventListener('click', async function () {
-        const budgetInput = document.getElementById('monthly-budget-input');
-        const budget = parseFloat(budgetInput.value);
-
-        if (isNaN(budget) || budget <= 0) {
-            budgetWarning.textContent = 'Please enter a valid budget.';
-        } else {
-            budgetWarning.textContent = '';
-            const user = auth.currentUser;
-
-            if (user) {
-                try {
-                    const userBudgetRef = ref(database, `users/${user.uid}/budget`);
-                    await set(userBudgetRef, budget);
-                    budgetDisplay.textContent = `Current Budget: Rs. ${budget.toFixed(2)}`;
-                    console.log("Budget saved successfully.");
-                } catch (error) {
-                    console.error("Error saving budget:", error);
-                }
-            } else {
-                console.warn("No user is logged in.");
-            }
-        }
-    });
-    function calculateTotalExpenses() {
-        const categories = ['food', 'transport', 'utilities', 'entertainment', 'education', 'others'];
-        let totalExpenses = 0;
-    
-        categories.forEach(category => {
-            const expenseElement = document.getElementById(`${category}-expense`);
-            const expenseValue = parseFloat(expenseElement.textContent.replace('Rs. ', '')) || 0;
-            totalExpenses += expenseValue;
-        });
-    
-        return totalExpenses;
-    }
-    
-
-    // Add expense
-    document.getElementById('add-expense-form').addEventListener('submit', async function (event) {
-        event.preventDefault();
-    
-        const expenseAmount = parseFloat(document.getElementById('expense-amount').value) || 0;
-        const expenseCategory = document.getElementById('expense-category').value;
-    
-        const budgetDisplay = document.getElementById('monthly-budget-display');
-        const currentBudget = parseFloat(budgetDisplay.textContent.replace('Current Budget: Rs. ', '')) || 0;
-    
-        // Calculate current total expenses
-        const currentTotalExpenses = calculateTotalExpenses();
-    
-        // Check if budget exceeds
-        if (currentTotalExpenses + expenseAmount > currentBudget) {
-            alert(`Budget Overflow! Your total expenses will exceed the budget of Rs. ${currentBudget.toFixed(2)}.`);
-            return;
-        }
-    
-        // Proceed with adding the expense
-        const expenseDescription = document.getElementById('expense-description').value;
-        const expenseDate = document.getElementById('expense-date').value;
-    
-        const user = auth.currentUser;
-        if (!user) {
-            console.error("No user is logged in.");
-            return;
-        }
-    
-        try {
-            const expenseRef = push(ref(database, `expenses/${user.uid}`));
-            await set(expenseRef, {
-                amount: expenseAmount,
-                description: expenseDescription,
-                date: expenseDate,
-                category: expenseCategory
-            });
-            document.getElementById('add-expense-form').reset();
-            console.log("Expense added successfully.");
-        } catch (error) {
-            console.error("Error adding expense:", error);
+            accountBalanceDisplay.textContent = 'Rs. 0.00';
         }
     });
 
@@ -111,7 +118,7 @@ window.onload = function () {
     auth.onAuthStateChanged(user => {
         if (user) {
             const expensesRef = ref(database, `expenses/${user.uid}`);
-            onValue(expensesRef, (snapshot) => {
+            onValue(expensesRef, snapshot => {
                 const expenses = snapshot.val();
                 const categoryTotals = {
                     food: 0,
@@ -141,6 +148,7 @@ window.onload = function () {
         }
     });
 };
+
 
 // Logout function
 function logout() {

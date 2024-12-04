@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/expense_list.css">
     <link rel="stylesheet" href="css/dialog-styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
 
 </head>
 <body>
@@ -69,6 +71,24 @@
                 </tbody>
             </table>
         </section>
+        <!-- Amount Credited List -->
+<section class="expense-table">
+    <h2>Amount Credited List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="credited-table-body">
+            <!-- Credited rows will be populated dynamically -->
+        </tbody>
+    </table>
+</section>
 
         <!-- Expense Summary -->
         <section class="expense-summary">
@@ -114,7 +134,7 @@
             </div>
         </div>
     </div>
-    
+    <div id="toast-message" class="toast hidden"></div>
     
     <!-- Include the JavaScript file -->
     <script src="js/dialog.js"></script>
