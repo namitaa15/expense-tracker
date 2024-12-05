@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "expense-tracker-d1144"
-  }
+    "default": "expense-tracker-d1144",
+    "production": "expense-tracker-d1144"
+  },
+  "targets": {},
+  "etags": {}
 }
