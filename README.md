@@ -31,7 +31,6 @@
 
 ## Folder Structure 📂
 ![Project Structure](public/images/project_structure.png)
-
 ## Screenshots 📸
 
 ### Login Page 🔑
